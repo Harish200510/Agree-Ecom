@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sell a Product</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://source.unsplash.com/1600x900/?farm,market') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      width: 350px;
+    }
+
+    .form-container h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #2e7d32;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="number"],
+    .form-container input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Sell Your Product</h2>
+    <input type="text" id="productName" placeholder="Product Name"><br>
+    <input type="number" id="productPrice" placeholder="Price"><br>
+    <input type="file" id="productImage"><br>
+    <select id="category">
+        <option value="" disabled selected>Select Category</option>
+        <option value="Vegetables & Fruits">Vegetables & Fruits</option>
+        <option value="Seeds">Seeds</option>
+        <option value="Pesticides">Pesticides</option>
+        <option value="Plants">Plants</option>
+      </select>
+      <br>
+      <br>
+      <br>
+    <button onclick="sellProduct()">Sell</button>
+  </div>
+
+  <script>
+    function sellProduct() {
+      const name = document.getElementById("productName").value.trim();
+      const price = document.getElementById("productPrice").value;
+      const imageFile = document.getElementById("productImage").files[0];
+      const category = document.getElementById("category").value.trim();
+
+      if (!name || !price || !imageFile || !category) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageData = e.target.result;
+
+        const product = {
+          name: name,
+          price: price,
+          image: imageData,
+          category: category
+        };
+
+        let soldProducts = JSON.parse(localStorage.getItem("soldProducts")) || [];
+        soldProducts.push(product);
+        localStorage.setItem("soldProducts", JSON.stringify(soldProducts));
+
+        alert("Product sold successfully!");
+        window.location.href = "home.html";
+      };
+
+      reader.readAsDataURL(imageFile);
+    }
+  </script>
+</body>
+</html>

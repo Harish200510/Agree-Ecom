@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page - Agriculture Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?farm,market,vegetables') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: rgba(0, 100, 0, 0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            position: relative;
+        }
+        .navbar .logo {
+            font-size: 24px;
+        }
+        .navbar .search-bar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 50%;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        .cart-icon, .profile-icon {
+            cursor: pointer;
+            font-size: 24px;
+            margin-left: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .category {
+            margin-bottom: 20px;
+        }
+        .category h2 {
+            background: rgba(0, 100, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 250px;
+            text-align: center;
+        }
+        .card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .card button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .card button:hover {
+            background: #45a049;
+        }
+        .profile-card {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 60px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 200px;
+            text-align: center;
+        }
+        .profile-card button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .profile-card button:hover {
+            background: darkred;
+        }
+        .sell-button {
+            margin-left: 20px;
+            padding: 10px 15px;
+            background-color: white;
+            color: green;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .sell-button:hover {
+            background-color: #e0ffe0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <span class="logo">Agriculture Store - Welcome</span>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+        </div>
+        <button class="sell-button" onclick="location.href='sell.html'">Sell</button>
+        <div class="icons">
+            <a href="cart.html" class="cart-icon"><img src="images/shopping-cart.png" alt="" style="width:35px;"></a>
+            <span class="profile-icon" onclick="toggleProfile()"><img src="images/user.png" alt="" style="width: 35px;background-color: white;border-radius: 30px;"></span>
+        </div>
+        <div class="profile-card" id="profileCard">
+            <h3 style="color: black;" id="profileName">User</h3>
+            
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    
+
+    
+    <div class="container">
+        <div class="category">
+            <h2 style="text-align: center;">Vegetables & Fruits</h2>
+            <div class="products" id="vegetables-fruits">
+                <div class="card">
+                    <img src="images/onion.jpeg" alt="Vegetables">
+                    <h3>Onion</h3>
+                    <p>₹30/kg</p>
+                    <button onclick="addToCart('Onion', 30)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/brinjal.avif" alt="Vegetables">
+                    <h3>Brinjal</h3>
+                    <p>₹40/kg</p>
+                    <button onclick="addToCart('Brinjal', 40)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/carraot.jpeg" alt="Vegetables">
+                    <h3>Carrot</h3>
+                    <p>₹25/kg</p>
+                    <button onclick="addToCart('Carrot', 25)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/starw.jpg" alt="Vegetables">
+                    <h3>Strawberry</h3>
+                    <p>₹300/kg</p>
+                    <button onclick="addToCart('Strawberry', 300)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/apple.jpeg" alt="Vegetables">
+                    <h3>Apple</h3>
+                    <p>₹100/kg</p>
+                    <button onclick="addToCart('Apple', 100)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/pomo.jpeg" alt="Vegetables">
+                    <h3>Pomegranate</h3>
+                    <p>₹150/kg</p>
+                    <button onclick="addToCart('Pomegranate', 150)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2 style="text-align: center;">Seeds</h2>
+            <div class="products" id="seeds">
+                <div class="card">
+                    <img src="images/melon.jpeg" alt="Seeds">
+                    <h3>Melon Seeds</h3>
+                    <p>₹100/pack</p>
+                    <button onclick="addToCart('Melon Seeds', 100)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/fenugreek.jpeg" alt="Seeds">
+                    <h3>Fenugreek Seeds</h3>
+                    <p>₹70/pack</p>
+                    <button onclick="addToCart('Fenugreek Seeds', 70)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/sesame.jpeg" alt="Seeds">
+                    <h3>Sesame Seeds</h3>
+                    <p>₹900/pack</p>
+                    <button onclick="addToCart('Sesame Seeds', 900)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/paddy.webp" alt="Seeds">
+                    <h3>Paddy Seeds</h3>
+                    <p>₹150/pack</p>
+                    <button onclick="addToCart('Paddy Seeds', 150)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/pupmkin.jpeg" alt="Seeds">
+                    <h3>Pumpkin Seeds</h3>
+                    <p>₹200/pack</p>
+                    <button onclick="addToCart('Pumpkin Seeds', 200)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/chia.jpeg" alt="Seeds">
+                    <h3>Chia Seeds</h3>
+                    <p>₹300/pack</p>
+                    <button onclick="addToCart('Chia Seeds', 300)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2 style="text-align: center;">Pesticides</h2>
+            <div class="products" id="pesticides">
+                <div class="card">
+                    <img src="images/copper.jpeg" alt="Pesticides">
+                    <h3>Copper Pesticide</h3>
+                    <p>₹100/bottle</p>
+                    <button onclick="addToCart('Copper Pesticide', 100)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/malathion.jpeg" alt="Pesticides">
+                    <h3>Malathion Pesticide</h3>
+                    <p>₹200/bottle</p>
+                    <button onclick="addToCart('Malathion Pesticide', 200)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/Mouse out.jpeg" alt="Pesticides">
+                    <h3>Mouse Out Pesticide</h3>
+                    <p>₹50/bottle</p>
+                    <button onclick="addToCart('Mouse Out Pesticide', 50)">Add to Cart</button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="category">
+            <h2 style="text-align: center;">Plants</h2>
+            <div class="products" id="plants">
+                <div class="card">
+                    <img src="images/aloe vera.jpeg" alt="Plants">
+                    <h3>Aloe Vera Plant</h3>
+                    <p>₹150/plant</p>
+                    <button onclick="addToCart('Aloe Vera Plant', 150)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/Rose.jpeg" alt="Plants">
+                    <h3>Rose Flower</h3>
+                    <p>₹50/plant</p>
+                    <button onclick="addToCart('Rose Flower', 50)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/tulasi.webp" alt="Plants">
+                    <h3>Tulasi Plant</h3>
+                    <p>₹100/plant</p>
+                    <button onclick="addToCart('Tulasi Plant', 100)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/banana.jpeg" alt="Plants">
+                    <h3>Banana Plant</h3>
+                    <p>₹200/plant</p>
+                    <button onclick="addToCart('Banana Plant', 200)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/mago.jpeg" alt="Plants">
+                    <h3>Mango Plant</h3>
+                    <p>₹90/plant</p>
+                    <button onclick="addToCart('Mango Plant', 90)">Add to Cart</button>
+                </div>
+                <div class="card">
+                    <img src="images/neem.jpeg" alt="Plants">
+                    <h3>Neem Plant</h3>
+                    <p>₹50/plant</p>
+                    <button onclick="addToCart('Neem Plant', 50)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.onload = function () {
+    const soldProducts = JSON.parse(localStorage.getItem("soldProducts")) || [];
+
+    soldProducts.forEach(product => {
+    if (!product.category) return;
+
+    // Find matching existing category by heading text
+    const allCategories = document.querySelectorAll(".category");
+    let container = null;
+
+    allCategories.forEach(cat => {
+        const heading = cat.querySelector("h2");
+        if (heading && heading.innerText.trim().toLowerCase() === product.category.toLowerCase()) {
+            container = cat.querySelector(".products");
+        }
+    });
+
+    // If no matching category, create new one
+    if (!container) {
+        const newCategory = document.createElement("div");
+        newCategory.className = "category";
+
+        newCategory.innerHTML = `
+            <h2 style="text-align: center;">${product.category}</h2>
+            <div class="products" id="${product.category.toLowerCase()}"></div>
+        `;
+
+        document.querySelector(".container").appendChild(newCategory);
+        container = newCategory.querySelector(".products");
+    }
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>₹${product.price}</p>
+        <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+    `;
+    container.appendChild(card);
+});
+
+
+    const user = localStorage.getItem("loggedInUser");
+    const profileName = document.getElementById("profileName");
+
+    if (user && profileName) {
+        profileName.innerText = user;
+    } else {
+        profileName.innerText = "Guest";
+    }
+};
+
+    
+        function searchProducts() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let cards = document.querySelectorAll(".card");
+    
+            cards.forEach(card => {
+                let title = card.getElementsByTagName("h3")[0].innerText.toLowerCase();
+                card.style.display = title.includes(input) ? "block" : "none";
+            });
+        }
+    
+        let cart = [];
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${product} added to cart!`);
+        }
+    
+        function toggleProfile() {
+            let profileCard = document.getElementById("profileCard");
+            profileCard.style.display = (profileCard.style.display === "block" ? "none" : "block");
+        }
+    
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            alert("Logged Out successfully!");
+            window.location.href = "login.html";
+        }
+    </script>
+    
+</body>
+</html>
